@@ -1,0 +1,27 @@
+openapi: 3.0.0
+
+info:
+  title: Fenny's F
+  version: 0.1.3
+
+servers:
+- url: https://GATEWAY_URL.apigw.yandexcloud.net # ! REPLACE IT
+- url: https://*.f.fenny013.com # https://*.f.example.com
+paths:
+  /:
+    x-yc-apigateway-any-method:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: FUNCTION_ID # ! REPLACE IT
+
+  /{proxy+}:
+    parameters:
+      - name: proxy
+        in: path
+        required: true
+        schema:
+          type: string
+    x-yc-apigateway-any-method:
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: FUNCTION_ID # ! REPLACE IT
